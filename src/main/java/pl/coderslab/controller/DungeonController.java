@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import pl.coderslab.model.Background;
 import pl.coderslab.model.Dungeon;
 import pl.coderslab.model.Enemy;
 import pl.coderslab.model.Level;
 import pl.coderslab.model.User;
+import pl.coderslab.repository.BackgroundRepository;
 import pl.coderslab.repository.DungeonRepository;
 import pl.coderslab.repository.EnemyRepository;
 import pl.coderslab.repository.LevelRepository;
@@ -37,6 +39,9 @@ public class DungeonController {
 	
 	@Autowired
 	private EnemyRepository enemyRepository;
+	
+	@Autowired
+	private BackgroundRepository backgroundRepository;
 	
 	@Autowired
 	private UserService userService;
@@ -65,14 +70,18 @@ public class DungeonController {
 		return "dungeonList";
 		
 	}
-	
+	//TU SIE DZIEJE MAGIA
 	@RequestMapping(path = "/theBackEnd", method = RequestMethod.GET)
 	public String GenerateDungeon(Model model, HttpServletRequest request) {
 		int nrOfEnemies = enemyRepository.getNumberOfEnemies();
 		int enemyNr = new Random().nextInt(nrOfEnemies)+1;
 		Enemy enemy = enemyRepository.findOne((long) enemyNr);
 		model.addAttribute("enemy",enemy);
+		int nrOfBackgrounds = backgroundRepository.getNumberOfBackgrounds();
+		int backgroundNr = new Random().nextInt(nrOfBackgrounds)+1;
 		
+		
+		model.addAttribute("backgroundNr", backgroundNr);
 		
 		User user = userService.getUserFromSession(request);
 		model.addAttribute("user",user);

@@ -21,6 +21,8 @@ public class Level {
 	private Enemy enemy;
 	@OneToOne(mappedBy="level")
 	private Dungeon dungeon;
+	@ManyToOne
+	private Background background;
 	
 	
 	public Long getId() {
@@ -47,6 +49,13 @@ public class Level {
 	public void setDungeon(Dungeon dungeon) {
 		this.dungeon = dungeon;
 	}
+	public Background getBackground() {
+		return background;
+	}
+	public void setBackground(Background background) {
+		this.background = background;
+	}
+	
 	
 	
 	
