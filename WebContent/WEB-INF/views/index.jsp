@@ -8,39 +8,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="http://users.pja.edu.pl/~s7505/CLcss/style.css">
+<link rel="stylesheet" href="http://users.pja.edu.pl/~s7505/CLcss/main.css">
+<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-hello ${loggedUser.username} 
-	<c:choose>
+<header class="page-header">
+    <ul class="menu">
+      <li><a href="users/list">Users</a></li>
+      <li><a href="enemies/list">Manage Stuff</a></li>
+      <li>
+      <c:choose>
 		<c:when test="${loggedUser.loggedIn==true }">
-			<a href="users/logout" class="nav">Logout</a>
+			<a href="users/logout">Logout</a>
 		</c:when>
 		<c:otherwise>
-			<a href="users/login" class="nav">Login</a>		<a href="users/register" class="nav">Register</a>
+			<a href="users/login">Login</a>		
 		</c:otherwise>
 	</c:choose>
-	<a href="users/list" class="nav">Users</a>
-	<a href="enemies/list">Manage Stuff</a>
-	
-	<div class="shoutbox">
-	<c:forEach var="s" items="${shouts}">
+	    
+      </li>
+      <c:if test = "${loggedUser.loggedIn==false}">
+          <li><a href="users/register">Register</a></li>
+      </c:if>
+      </ul>
+</header>
+<section class="shout-box">
+  <div class="shout">
+  	<c:forEach var="s" items="${shouts}">
 			<p>${fn:substring(s.created, 11, 16)}: ${s.user.username}: ${s.text}<p>
 	</c:forEach>
-	</div>
-	<c:if test = "${loggedUser.loggedIn==true}">
-	    <form:form method="post" modelAttribute="shout" action="shouts">
-			<form:errors path="*"/><br>
-				<form:input path="text"/><input type="submit" value="Shout">
+  </div>
+    <c:if test = "${loggedUser.loggedIn==true}">
+	    <form:form method="post" modelAttribute="shout" action="shouts" class="form-main">
+			<form:errors path="*"/>
+				<form:input path="text"/><br>
+				<input type="submit" value="Shout">
 		</form:form>
 	</c:if>
-	<a href="dungeons/theBackEnd"><img src="http://users.pja.edu.pl/~s7505/images/penguin.png" title="Enter the Backend"/></a>
-	<a href="dungeons/frontEnd""><img src="http://users.pja.edu.pl/~s7505/images/penguin.png" title="Enter the frontend"/></a>
-	<div class="loggedInUsers">
-	<p>Logged in users</p>
-	<c:forEach var="u" items="${loggedInUsers}">
-			${u.username} 
-	</c:forEach>
-	</div>
+</section>
+
+<section class="gates">
+  <div class="door">
+  <a href="dungeons/frontEnd"><img src="http://users.pja.edu.pl/~s7505/images/img/door-575566_1280.png" /></a>
+	<a href="dungeons/theBackEnd"><img src="http://users.pja.edu.pl/~s7505/images/img/door-575976_1920.png"/></a>
+</div>
+<div class="sign">
+  <a class="front" href="">front end</a>
+  <a href="">back end</a>
+</div>
+</section>
+	
+	
 </body>
 </html>

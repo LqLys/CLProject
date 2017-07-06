@@ -5,10 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://users.pja.edu.pl/~s7505/main/tabej/main.css" />
 <title>Insert title here</title>
 </head>
 <body>
-<a href="/CLProject">Home Page</a>
+<header class="page-header">
+    <ul class="menu">
+      <li><a href="/CLProject/">Homepage</a></li>
+     
+      </ul>
+</header>
 <table>
 	<tr>
 		<th>Username</th>

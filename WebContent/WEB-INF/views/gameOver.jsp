@@ -5,10 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="http://users.pja.edu.pl/~s7505/main/gameover/main.css"/>
+<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">	
 <title>Insert title here</title>
 </head>
 <body>
-<a href="/CLProject">Home Page</a><br>
-Your final score is ${finalScore}
+	
+	<p><a href="/CLProject">Final score ${finalScore}</a></p>
+	
 </body>
 </html>

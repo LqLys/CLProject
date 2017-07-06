@@ -5,9 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://users.pja.edu.pl/~s7505/main/tabej/main.css" />
 <title>Insert title here</title>
 </head>
 <body>
+<header class="page-header">
+    <ul class="menu">
+      <li><a href="/CLProject">Home Page</a></li>
+		<li><a href="/CLProject/levels/list">Levels</a></li>
+		<li><a href="/CLProject/quotes/list">Quotes</a></li>
+		<li><a href="/CLProject/enemies/list">Enemies</a></li>
+		<li><a href="/CLProject/answers/list">Answers</a></li>
+     
+      </ul>
+</header>
 <a href="/CLProject/riddles/add">Add Riddle</a>
 <table>
 	<tr>

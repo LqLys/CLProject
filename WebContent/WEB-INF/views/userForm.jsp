@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="http://users.pja.edu.pl/~s7505/form.css" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Add user</title>
 </head>
 <body>

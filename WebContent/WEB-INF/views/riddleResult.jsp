@@ -5,18 +5,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="http://users.pja.edu.pl/~s7505/main/last-one/main.css" />
+<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 </head>
 <body>
-	your answer is ${riddleResult}<br>
-	your score is ${score}<br>
-	your remaining health is ${remainingHP}<br>
-	your current streak is ${streak}<br>
-	your current rafal points is ${RafPoints}<br>
-	<c:if test = "${riddleResult==false}">
-        	Correct answer was: ${correctStr}<br>
+<section class="main-bg">
+    <div class="main">
+      <p>your answer is ${riddleResult}</p>
+      <p>your score: ${score}</p>
+      <p>your remaining health: ${remainingHP}</p>
+      <p>your current streak: ${streak}</p>
+      <p>your current rafal points: ${RafPoints}</p>
+      <c:if test = "${riddleResult==false}">
+        	<p>Correct answer was: ${correctStr}</p>
       </c:if>
-	<a href="/CLProject/dungeons/theBackEnd">Neeeeeeext</a>
-	<a href="/CLProject/dungeons/arek">Opowiedz dowcip arkowi</a>
+      
+      <div class="buttons">
+        <a href="/CLProject/dungeons/theBackEnd" class="button">Neeeeeeext</a>
+        <a href="/CLProject/dungeons/arek" class="button">Opowiedz dowcip arkowi</a>
+      </div>
+    </div>
+  </section>
+	
 </body>
 </html>

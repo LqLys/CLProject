@@ -5,18 +5,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="http://users.pja.edu.pl/~s7505/main/tabej/main.css" />
+<title>Enemies</title>
 </head>
 <body>
-<div>
-<a href="/CLProject">Home Page</a>
-<a href="/CLProject/levels/list">Levels</a>
-<a href="/CLProject/quotes/list">Quotes</a>
-<a href="/CLProject/dungeons/list">Dungeons</a>
-<a href="/CLProject/riddles/list">Riddles</a>
-<a href="/CLProject/answers/list">Answers</a>
+<header class="page-header">
+    <ul class="menu">
+      <li><a href="/CLProject">Home Page</a></li>
+		<li><a href="/CLProject/levels/list">Levels</a></li>
+		<li><a href="/CLProject/quotes/list">Quotes</a></li>
+		<li><a href="/CLProject/riddles/list">Riddles</a></li>
+		<li><a href="/CLProject/answers/list">Answers</a></li>
+     
+      </ul>
+</header>
 
-</div>
 <a href="/CLProject/enemies/add">Add enemy</a>
 <table>
 	<tr>

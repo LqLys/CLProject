@@ -5,18 +5,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="http://users.pja.edu.pl/~s7505/main/murzyn/main.css" />
+<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 </head>
 <body>
-	Your current Health is: ${currentHealth}<br>
-	You have ${availableRafals} Rafal points<br>
-	
-	<form:form method="post" modelAttribute="arekDTO">
-		<form:errors path="*"/><br>
-		How good will your joke be?<br>
-		<form:input path="pointsToSpend"/><br> 
-				
-		<input type="submit" value="Tell the joke">
+ <section class="plaza">
+    <div class="main">
+    <p>Witaj w krainie suchych dowcipów</p>
+    <p>Opowiedz dowcip Arkowi</p>
+      <p>Current health: ${currentHealth}</p>
+      <p>Available Rafal points: ${availableRafals}</p>
+      <form:form method="post" modelAttribute="arekDTO">
+		<form:errors path="*"/>
+			<p>Ile rafalow chcesz uzyć?</p>
+		<form:input path="pointsToSpend"/>
+		<input type="submit" value="Say the joke!">
 	</form:form>
+    </div>
+    <div class="nigga"></div>
+  </section>
+	
+	
+	
+	
 </body>
 </html>
