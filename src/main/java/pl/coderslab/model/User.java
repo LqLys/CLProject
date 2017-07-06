@@ -33,6 +33,10 @@ public class User {
 	
 	private int currentHealth;
 	
+	private int score;
+	private int rafalPoints;
+	private int streak;
+	private int highestScore;
 	@OneToMany(mappedBy="receiver")
 	private List<Message>received = new ArrayList<>();
 	
@@ -133,6 +137,38 @@ public class User {
 
 	public void setDungeon(Dungeon dungeon) {
 		this.dungeon = dungeon;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getRafalPoints() {
+		return rafalPoints;
+	}
+
+	public void setRafalPoints(int rafalPoints) {
+		this.rafalPoints = rafalPoints;
+	}
+
+	public int getStreak() {
+		return streak;
+	}
+
+	public void setStreak(int streak) {
+		this.streak = streak;
+	}
+
+	public int getHighestScore() {
+		return highestScore;
+	}
+
+	public void setHighestScore(int highestScore) {
+		this.highestScore = highestScore;
 	}
 	
 	

@@ -8,26 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="/CLProject/answers/add">Add answer</a>
-<table>
-	<tr>
-		<th>Riddle</th>
-		<th>text</th>
-		<th>Is correct</th>
-
-		
-	</tr>
-	<c:forEach var="a" items="${answers}">
-		<tr>
-			<td><c:out value="${a.riddle.name}"/></td>
-			<td><c:out value="${a.text}"/></td>
-			<td><c:out value="${a.correct}"/></td>
-			
-			
-			
-	
-	</c:forEach>
-</table>
+	  <c:forEach var = "i" begin = "1" end = "${jokeLength}">
+         *&^%%#$@#$@#!
+      </c:forEach>
 
 </body>
 </html>

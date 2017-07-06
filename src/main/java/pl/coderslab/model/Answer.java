@@ -52,6 +52,11 @@ public class Answer {
 	public void setRiddle(Riddle riddle) {
 		this.riddle = riddle;
 	}
+
+	@Override
+	public String toString() {
+		return  text;
+	}
 	
 	
 	

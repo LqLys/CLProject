@@ -18,6 +18,8 @@ public class Dungeon {
 	private User user;
 	@OneToOne
 	private Level level;
+	@OneToOne
+	private Riddle riddle;
 	public Long getId() {
 		return id;
 	}
@@ -35,6 +37,12 @@ public class Dungeon {
 	}
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+	public Riddle getRiddle() {
+		return riddle;
+	}
+	public void setRiddle(Riddle riddle) {
+		this.riddle = riddle;
 	}
 	
 	

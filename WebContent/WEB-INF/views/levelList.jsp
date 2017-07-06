@@ -29,7 +29,7 @@
 			<td><c:out value="${l.background.name}"/></td>
 			
 			
-			
+			</tr>
 	
 	</c:forEach>
 </table>

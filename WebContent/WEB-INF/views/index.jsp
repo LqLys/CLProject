@@ -35,6 +35,7 @@ hello ${loggedUser.username}
 		</form:form>
 	</c:if>
 	<a href="dungeons/theBackEnd"><img src="http://users.pja.edu.pl/~s7505/images/penguin.png" title="Enter the Backend"/></a>
+	<a href="dungeons/frontEnd""><img src="http://users.pja.edu.pl/~s7505/images/penguin.png" title="Enter the frontend"/></a>
 	<div class="loggedInUsers">
 	<p>Logged in users</p>
 	<c:forEach var="u" items="${loggedInUsers}">

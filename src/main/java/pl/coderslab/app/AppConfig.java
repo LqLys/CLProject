@@ -69,11 +69,21 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(getLevelConverter());
+		registry.addConverter(getAnswerConverter());
+		registry.addConverter(getRiddleConverter());
 	}
 
 	@Bean
 	public LevelConverter getLevelConverter() {
 		return new LevelConverter();
+	}
+	@Bean
+	public AnswerConverter getAnswerConverter() {
+		return new AnswerConverter();
+	}
+	@Bean
+	public RiddleConverter getRiddleConverter() {
+		return new RiddleConverter();
 	}
 
 }

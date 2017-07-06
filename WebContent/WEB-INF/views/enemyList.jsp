@@ -13,6 +13,8 @@
 <a href="/CLProject/levels/list">Levels</a>
 <a href="/CLProject/quotes/list">Quotes</a>
 <a href="/CLProject/dungeons/list">Dungeons</a>
+<a href="/CLProject/riddles/list">Riddles</a>
+<a href="/CLProject/answers/list">Answers</a>
 
 </div>
 <a href="/CLProject/enemies/add">Add enemy</a>

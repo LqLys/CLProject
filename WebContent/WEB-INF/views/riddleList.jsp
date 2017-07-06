@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="/CLProject/riddles/add">Add Riddle</a>
 <table>
 	<tr>
 		<th>Name</th>

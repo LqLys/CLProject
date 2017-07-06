@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +22,8 @@ public class Riddle {
 	private String text;
 	@OneToMany(mappedBy="riddle")
 	private List<Answer> answers;
+	@OneToOne(mappedBy="riddle")
+	private Dungeon dungeon;
 
 	public Long getId() {
 		return id;
@@ -52,6 +55,14 @@ public class Riddle {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
+
+	public void setDungeon(Dungeon dungeon) {
+		this.dungeon = dungeon;
 	}
 	
 	

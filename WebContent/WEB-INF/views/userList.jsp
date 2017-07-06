@@ -15,6 +15,7 @@
 		<th>Email</th>
 		<th>Max Health</th>
 		<th>Current Health</th>
+		<th>Highest Score</th>
 		<th>Edit</th>
 		<th>Delete</th>
 
@@ -26,6 +27,7 @@
 			<td><c:out value="${u.email}"/></td>
 			<td><c:out value="${u.maxHealth}"/></td>
 			<td><c:out value="${u.currentHealth}"/></td>
+			<td><c:out value="${u.highestScore}"/></td>
 			<td><a href="/CLProject/users/edit/${u.id}">Edit User</a></td>
 			<td><a href="/CLProject/users/delete/${u.id}">Delete User</a></td>
 			<td><a href="/CLProject/messages/send/${u.id}">Send Message</a></td>
