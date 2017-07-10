@@ -23,7 +23,7 @@ public class AnswerService {
 	}
 
 	public List<Answer> getAnswersFromSession(HttpServletRequest request, String sessionAttribute) {
-		return (List<Answer>) request.getSession().getAttribute("sessionAttribute");
+		return (List<Answer>) request.getSession().getAttribute(sessionAttribute);
 	}
 
 	public String getTextOfCorrectAnswers(List<Answer> correctAnswers) {
