@@ -2,7 +2,6 @@ package pl.coderslab.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -23,13 +22,14 @@ import pl.coderslab.model.Enemy;
 import pl.coderslab.model.Level;
 import pl.coderslab.model.Riddle;
 import pl.coderslab.model.User;
-import pl.coderslab.repository.BackgroundRepository;
 import pl.coderslab.repository.DungeonRepository;
-import pl.coderslab.repository.EnemyRepository;
 import pl.coderslab.repository.LevelRepository;
-import pl.coderslab.repository.RiddleRepository;
 import pl.coderslab.repository.UserRepository;
-import pl.coderslab.utils.UserService;
+import pl.coderslab.service.AnswerService;
+import pl.coderslab.service.BackgroundService;
+import pl.coderslab.service.EnemyService;
+import pl.coderslab.service.RiddleService;
+import pl.coderslab.service.UserService;
 
 @Controller
 @RequestMapping("/dungeons")
@@ -43,17 +43,22 @@ public class DungeonController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private EnemyRepository enemyRepository;
 	
-	@Autowired
-	private BackgroundRepository backgroundRepository;
-	
-	@Autowired
-	private RiddleRepository riddleRepository;
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private EnemyService enemyService;
+	
+	@Autowired
+	private BackgroundService backgroundService;
+	
+	@Autowired 
+	private RiddleService riddleService;
+	
+	@Autowired
+	private AnswerService answerService;
 	
 	
 	@RequestMapping(path = "/add", method = RequestMethod.GET)
@@ -79,89 +84,44 @@ public class DungeonController {
 		return "dungeonList";
 		
 	}
-	//TU SIE DZIEJE MAGIA
+	
 	@RequestMapping(path = "/theBackEnd", method = RequestMethod.GET)
 	public String generateDungeon(Model model, HttpServletRequest request) {
 		DungeonDTO dungeonDto = new DungeonDTO();
-								
-		int nrOfEnemies = enemyRepository.getNumberOfEnemies();
-		int enemyNr = new Random().nextInt(nrOfEnemies)+1;
-		Enemy enemy = enemyRepository.findOne((long) enemyNr);
-		model.addAttribute("enemy",enemy);
-		
-		int nrOfBackgrounds = backgroundRepository.getNumberOfBackgrounds();
-		int backgroundNr = new Random().nextInt(nrOfBackgrounds)+1;
-		model.addAttribute("backgroundNr", backgroundNr);
-		
-		int nrOfRiddles = riddleRepository.getNumberOfRiddles();
-		int riddleNr = new Random().nextInt(nrOfRiddles)+1;
-		Riddle riddle = riddleRepository.findOne((long) riddleNr);
-		
-		List<String>answersStr = new ArrayList<>();
-		for(Answer a : riddle.getAnswers()){
-			answersStr.add(a.getText());
-		}
-		model.addAttribute("answersStr", answersStr);
+				
+		model.addAttribute("enemy",enemyService.generateRandomEnenmy());
+		model.addAttribute("backgroundNr", backgroundService.generateRandomBackground());
+				
+		Riddle riddle = riddleService.generateRandomRiddle();
+		model.addAttribute("answersStr", riddleService.getAnswersFromRiddle(riddle));
 		
 		List<Answer>ridAnswers= riddle.getAnswers();
 		request.getSession().setAttribute("anz", ridAnswers);
 		
 			
 		model.addAttribute("riddle", riddle);
-		
-		
+				
 		User user = userService.getUserFromSession(request);
 		model.addAttribute("user",user);
 		model.addAttribute("dungeonDTO",new DungeonDTO());
 		request.getSession().setAttribute("riddle", riddle);
 		request.getSession().setAttribute("dungeonDTO", dungeonDto);
-		
-		
+				
 		return "regularDungeon";
 
 	}
 	
 	@RequestMapping(path="theBackEnd", method=RequestMethod.POST)
 	public String processDungeon(@Valid @ModelAttribute DungeonDTO dungeonDTO, BindingResult result, Model model, HttpServletRequest request){
-		DungeonDTO dung = (DungeonDTO) request.getSession().getAttribute("dungeonDTO");
-		String ans = "";
-		List<String> dtoStrings = dungeonDTO.getAnswersStr();
-		for(String s : dtoStrings){
-			ans+= s + " ";
-		}
-		//ile poprawnych odpowiedzi ogolnie
-		List<Answer> anss = (List<Answer>) request.getSession().getAttribute("anz");
-		List<Answer>correctAnswers = new ArrayList<>();
-		String boo = "";
-		int cor = 0;
-		int incorr = 0;
-		for(Answer a : anss){
-			boo += a.isCorrect() + " ";
-			if(a.isCorrect()){
-				correctAnswers.add(a);
-				cor++;
-			}else{
-				incorr++;
-			}
-		}
-		String correctStr = "";
+		List<String> dtoStrings = riddleService.getAnswersOfUser(dungeonDTO);
+				
+		List<Answer> anss = answerService.getAnswersFromSession(request, "anz");
+		List<Answer>correctAnswers = answerService.getCorrectAnswers(anss);
+				
+		int numberOfCorrectAnswers = answerService.getAmountOfCorrectAnswersFromUser(anss, dtoStrings);
 		
-		for(Answer a : correctAnswers){
-			correctStr += a.getText() + " ";
-		}
+		boolean correctAnswer = answerService.evaluateAnswer(dtoStrings, numberOfCorrectAnswers);
 		
-		//ile poprawnych odpowiedzi od uzytkownika
-		int corrFromForm = 0;
-		for(Answer a : anss){
-			for(String s : dtoStrings){
-				if(a.getText().equals(s) && a.isCorrect()){
-					corrFromForm++;
-				}
-			}
-		}
-		
-		boolean correctAnswer = dtoStrings.size() == corrFromForm ? true : false;
-		int userWrong = anss.size()-corrFromForm;
 		User user = userService.getUserFromSession(request);
 		if(correctAnswer){
 			user.setScore(user.getScore()+1);
@@ -173,7 +133,7 @@ public class DungeonController {
 		}else{
 			user.setCurrentHealth(user.getCurrentHealth()-100);
 			user.setStreak(0);
-			model.addAttribute("correctStr",correctStr);
+			model.addAttribute("correctStr",answerService.getTextOfCorrectAnswers(correctAnswers));
 			
 		}
 		userRepository.save(user);
@@ -182,10 +142,7 @@ public class DungeonController {
 		model.addAttribute("streak", user.getStreak());
 		model.addAttribute("RafPoints", user.getRafalPoints());
 		model.addAttribute("riddleResult",correctAnswer);
-//		return "wartosci odpowiedzi ogolnie: " + boo + "<br>" + "odpowiedzi uzytkownika: " + ans +"<br> " +
-//				"ilosc poprawnych odpowiedzi ogolnie: " + cor + "<br>" +"ilosc zlych odpowiedzi ogolnie: " +
-//				incorr + "<br>" + "ilosc poprawnych odpowiedzi od uzytkownika: " +corrFromForm  +"<br>" + "ilosc niezaznaczonych odp: " + userWrong +
-//				"<br>" + "ile odpowiedzi zaznaczyl user: " + dtoStrings.size() + "<br>" + "odpowiedz jest: " + correctAnswer;
+
 		if(user.getCurrentHealth()<=0){
 			int finalScore = user.getScore();
 			user.setCurrentHealth(user.getMaxHealth());
